@@ -1,0 +1,25 @@
+{
+  "name": "mohamedelaraby/quickcrud",
+  "description": "Laravel CRUD Generator Package",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "mohamedelaraby\\QuickCrud\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "mohamedelaraby\\QuickCrud\\QuickCrudServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^7.4|^8.0",
+    "illuminate/support": "^8.0|^9.0|^10.0",
+    "yajra/laravel-datatables": "^10.0",
+    "yajra/laravel-datatables-buttons": "^10.0",
+    "yajra/laravel-datatables-oracle": "^10.3.1"
+  }
+}

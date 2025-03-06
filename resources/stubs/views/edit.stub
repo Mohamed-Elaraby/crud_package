@@ -1,0 +1,54 @@
+@extends('admin.layouts.master')
+
+@section('title', ucwords(__('trans.edit ')) . '{{titleUpperCase}}')
+
+@section('styles')
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="{{asset('build/assets/libs/prismjs/themes/prism-coy.min.css')}}">
+@endsection
+
+@section('content')
+    <!--APP-CONTENT START-->
+    <div class="main-content app-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card custom-card">
+                        <div class="card-header justify-content-between">
+                            <div class="card-title">
+                                {{ __('trans.edit') }}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('admin.{{pluralModel}}.update', ${{modelVariable}}->id) }}" method="POST">
+                                @method('PUT')
+                                @csrf
+
+                                @foreach($fields as $field)
+                                <div class="mb-3">
+                                    <label for="{{modelVariable}}" class="form-label fs-14 text-dark">
+                                       name
+                                    </label>
+                                    <div class="input-group">
+                                        <div class="input-group-text"><i class="ri-user-5-fill"></i></div>
+                                        <input name="name" type="text" class="form-control" id="{{modelVariable}}" value="{{ ${{modelVariable}}->name }}">
+
+                                    </div>
+                                    @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                @endforeach
+                                <button class="btn btn-primary" type="submit">{{ __('trans.update') }}</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+
+@endsection

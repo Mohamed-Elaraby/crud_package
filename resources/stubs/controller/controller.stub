@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\DataTables\{{ModelName}}DataTable;
+use App\Models\{{ModelName}};
+use Illuminate\Http\Request;
+
+class {{ModelName}}Controller extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('permission:read-{{modelVariable}}')->only('index');
+        $this->middleware('permission:create-{{modelVariable}}')->only('create');
+        $this->middleware('permission:update-{{modelVariable}}')->only('edit');
+        $this->middleware('permission:delete-{{modelVariable}}')->only('destroy');
+    }
+
+    public function index({{ModelName}}DataTable $dataTable)
+    {
+        return $dataTable->render('admin.{{pluralModel}}.index');
+    }
+
+    public function create()
+    {
+        return view('admin.{{pluralModel}}.create');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate(['name' => 'required']);
+        {{ModelName}}::create($data);
+        return redirect()->route('admin.{{pluralModel}}.index');
+    }
+
+    public function edit({{ModelName}} ${{modelVariable}})
+    {
+        return view('admin.{{pluralModel}}.edit', compact('{{modelVariable}}'));
+    }
+
+    public function update(Request $request, {{ModelName}} ${{modelVariable}})
+    {
+        $data = $request->validate(['name' => 'required']);
+        ${{modelVariable}}->update($data);
+        return redirect()->route('admin.{{pluralModel}}.index');
+    }
+
+    public function destroy({{ModelName}} ${{modelVariable}})
+    {
+        ${{modelVariable}}->delete();
+        return redirect()->route('admin.{{pluralModel}}.index');
+    }
+}

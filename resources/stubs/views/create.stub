@@ -1,0 +1,60 @@
+@extends('admin.layouts.master')
+
+@section('title', ucwords(__('trans.create ')) . '{{titleUpperCase}}')
+
+@section('styles')
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="{{asset('build/assets/libs/prismjs/themes/prism-coy.min.css')}}">
+@endsection
+
+@section('content')
+    <!--APP-CONTENT START-->
+    <div class="main-content app-content">
+        <div class="container-fluid">
+            <!-- Start:: row-2 -->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card custom-card">
+                        <div class="top-left"></div>
+                        <div class="top-right"></div>
+                        <div class="bottom-left"></div>
+                        <div class="bottom-right"></div>
+                        <div class="card-header justify-content-between">
+                            <div class="card-title">
+                                {{ __('trans.create') }}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('admin.{{pluralModel}}.store') }}" method="POST">
+                                @method('POST')
+                                @csrf
+                                <!-- Dynamic Form Fields Will Be Added Here -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label fs-14 text-dark">{{ __('trans.{{translationFormattedString}} name') }}</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text"><i class="ri-user-5-fill"></i></div>
+                                        <input name="name" type="text" class="form-control" id="name" value="{{ old('name') }}">
+                                    </div>
+                                    @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!-- Add more fields as needed -->
+                                <button class="btn btn-primary" type="submit">{{ __('trans.create') }}</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End:: row-2 -->
+        </div>
+    </div>
+    <!--APP-CONTENT CLOSE-->
+@endsection
+
+@section('scripts')
+    <!-- Prism JS -->
+    <script src="{{asset('build/assets/libs/prismjs/prism.js')}}"></script>
+    @vite('resources/assets/js/prism-custom.js')
+    <script>
+        // Add dynamic scripts here if
