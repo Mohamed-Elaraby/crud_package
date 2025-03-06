@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\QuickCrud;
+namespace mohamedelAraby\QuickCrud;
 
 use Illuminate\Support\ServiceProvider;
 
